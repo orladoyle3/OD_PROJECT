@@ -4,9 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+gdp= pd.read_csv('gdp_csv.csv')
+print(gdp.info())
 
-os.getcwd()
-print(os.getcwd())
-
-data = pd.read_csv("C:/Users/orlad/OneDrive/Desktop/OD_PROJECT.gdp_csv.csv","r")
-
+eu = pd.read_csv('states.csv')
+print(eu.info())
