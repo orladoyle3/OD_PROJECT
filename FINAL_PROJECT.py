@@ -22,8 +22,15 @@ gdp_eu = gdp_eu.drop(col_list, axis=1)
 '#replace missing values in dataset'
 gdp_eu = gdp_eu.fillna(0)
 
-'# group data by European Union - Member'
-gdp_eu1 = gdp_eu.groupby('European Union')['GDP (€, millions)'].plot(legend=True)
+'# Select years 2010 to 2016, all EU members states and candidates plus USA'
+gdp_eu1 = gdp_eu[(gdp_eu['Year'] >= 2010) & (gdp_eu['European Union'] == 'Member') | (gdp_eu["Country Code"] == "USA")]
 
-gdp_eu['Per Capita'] = gdp_eu['GDP (€, millions)'] / gdp_eu['Population']
 
+'#group by country and calculate mean gdp from 2010 to 2016'
+eu_average = gdp_eu1.groupby('Country Name')['Value'].mean() /1e9
+
+fig, ax = plt.subplots()
+ax.bar(gdp_eu1['Country Name'], gdp_eu1['Value'])
+ax.set_xticklabels(gdp_eu1['Country Name'], rotation=45)
+ax.set_ylabel("€'000m")
+plt.show()
